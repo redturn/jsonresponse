@@ -1,0 +1,23 @@
+{
+  "name": "jsonreponse",
+  "version": "0.0.1",
+  "description": "Uniform JSON response object",
+  "author": {
+    "name": "Brian Mancini",
+    "email": "bmancini@gmail.com"
+  },
+  "main": "lib/jsonresponse.js",
+  "dependencies": {
+    "debug": "~0.8.1"
+  },
+  "engines": {
+    "node": ">=0.10"
+  },
+  "scripts": {
+    "test": "mocha"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/nightworld/node-oauth2-server.git"
+  }
+}
