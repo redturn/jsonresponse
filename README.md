@@ -30,6 +30,8 @@ An error response would have the format:
 }
 ```
 
+Additionally, this module will automatically call `toClient` method on the Object or Array that JsonResponse receives in its constructor.
+
 ##Usage
 
 Install jsonresponse from NPM:
@@ -52,7 +54,7 @@ var results = { foo: 'bar' }
 var json = new JsonResponse(null, results);
 ```
 
-To create an error response, pass in the error result as the first argument.  The 
+To create an error response, pass in the error result as the first argument.
 ```
 var error = new Error('Boom!')
 var json = new JsonResponse(error);
@@ -76,16 +78,40 @@ app.get('/', function(req, res) {
 
 Alternatively, you can reduce boilerplate by using the express Helper that will construct the JsonResponse object for you and send the result back.
 ```
-var JsonResponse    = require('JsonResponse')
-  , expressHandler  = JsonResponse.expressHandler
-
 app.get('/error', function(req, res) {
   
-  makeAsyncCall(expressHandler(res));
+  var jsonResponse = JsonResponse.expressHandler(res);
+  makeAsyncCall(jsonResponse);
 
 });
 
 ```
+
+### toClient
+The `toClient` handling of the result argument will automatically execute for Objects or Arrays. The toClient method should return a mutated version of the object.
+
+Take for example this object with its `toClient` method:
+```
+var result = {
+  _id: '1234'
+  __V: 0,
+
+  toClient: function() {
+    this.id = this._id;
+    delete this._id;
+    delete this.__V;
+  }
+};
+```
+
+The `toClient` method will conver `_id` to `id` and strip out the `_id` and `__V` properties for a result that looks like:
+```
+{
+  id: '1234'
+}
+```
+
+The JsonResponse object will automatically perform that conversion in its constructor.
 
 
 ##Contributing
