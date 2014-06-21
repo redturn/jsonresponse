@@ -40,10 +40,21 @@ describe('JsonResponse constructor', function () {
 
     describe('that is instanceOf Object', function () {
 
-      it('executes toClient ', function () {
+      it('executes toClient on object if available', function () {
         var result = new Clientable();
         var sut = new JsonResponse(null, result);
         expect(sut.results.client).to.be.true;
+      });
+
+      it('executes toClient on properties if no object toClient', function () {
+        var result = { 
+          sub1: new Clientable(),
+          sub2: new Clientable()
+        };
+
+        var sut = new JsonResponse(null, result);
+        expect(sut.results.sub1.client).to.be.true;
+        expect(sut.results.sub2.client).to.be.true;
       });
 
     });
