@@ -104,6 +104,21 @@ describe('JsonResponse constructor', function () {
 
   });
 
+  describe('with null', function() {
+    it('sets success to true', function () {
+      var sut = new JsonResponse(null, null);
+      expect(sut.success).to.be.true;
+    });
+    it('sets error to null', function () {
+      var sut = new JsonResponse(null, null);
+      expect(sut.error).to.be.null;
+    });
+    it('sets results to null', function () {
+      var sut = new JsonResponse(null, null);
+      expect(sut.results).to.be.null;
+    });
+  });
+
 });
 
 describe('JsonResponse.expressHandler', function () {

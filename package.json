@@ -1,6 +1,6 @@
 {
   "name": "jsonresponse",
-  "version": "0.1.2",
+  "version": "0.1.3",
   "description": "Uniform JSON response object",
   "author": {
     "name": "Brian Mancini",
